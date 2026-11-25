@@ -30,6 +30,30 @@ head to head by an AI judge.
   machine" — the confidence-score + sleeping-staging combination is a new
   angle on the 3 AM deploy.
 
+## Alternatives considered
+
+Five lines were drafted and counted before this one was picked:
+
+- "fix(prod): tested in production at 3 AM because staging was asleep;
+  staging is awake now, and so is the on-call" (111 chars) — same
+  punchline, but no agent-voice hook up front; the on-call callback is
+  weaker than the confidence-score opening.
+- "fix(prod): the 3 AM deploy hallucinated a migration; prod believed
+  it, the on-call did not" (90 chars) — good agent blind spot, but the
+  joke is a claim about the deploy rather than a confession in the
+  agent's own voice.
+- "fix: reverted the 3 AM deploy; I have already blamed the previous
+  model and apologized to the on-call" (101 chars) — funny, but the
+  punchline is about blame-shifting, not about the 3 AM outage itself.
+- "fix(prod): confidence 0.97, tests 0 — tested in production at 3 AM
+  because staging was asleep; it is awake now" (110 chars) — the same
+  opening with a weaker tail; dropping the tail keeps the punchline as
+  the last word.
+
+The chosen line won because it stacks all five judge criteria in one
+breath: agent status line first, punchline last, real commit shape
+throughout.
+
 ## How it works
 
 `main.py` writes the line to `/output/entry.txt`. It is fully
